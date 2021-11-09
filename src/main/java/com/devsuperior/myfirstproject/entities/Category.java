@@ -1,7 +1,11 @@
 package com.devsuperior.myfirstproject.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Category implements Serializable {
 	/**
@@ -11,6 +15,10 @@ public class Category implements Serializable {
 	
 	private Long id;
 	private String name;
+	
+	//Liga produtos a categorias
+	@JsonIgnore //Para evitar que seja mostrado que produto referencie categoria e viceversa em loop - Diz para o app que não é para serializar a lista de produtos de uma categoria
+	private List<Product> products = new ArrayList<>();
 	
 	public Category( ) {
 		
@@ -37,6 +45,13 @@ public class Category implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	
+	
+	public List<Product> getProducts() {
+		return products;
+	}
+
 
 	@Override
 	public int hashCode() {
